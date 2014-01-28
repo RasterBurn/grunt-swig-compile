@@ -1,5 +1,7 @@
 # grunt-swig-compile
 
+[![Build Status](https://travis-ci.org/RasterBurn/grunt-swig-compile.png)](https://travis-ci.org/RasterBurn/grunt-swig-compile)
+
 > precompile swig templates
 
 ## Getting Started
