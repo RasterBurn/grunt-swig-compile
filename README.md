@@ -37,46 +37,50 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.wrap-start
 Type: `String`
-Default value: `',  '`
+Default value: `'var tpl = '`
 
-A string value that is used to do something with whatever.
+Template wrapper beginning
 
-#### options.punctuation
+#### options.wrap-end
 Type: `String`
-Default value: `'.'`
+Default value: `';'`
 
-A string value that is used to do something else with whatever else.
+Template wrapper end
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+Use the default options to precompile templates ending with `.swig`
 
 ```js
 grunt.initConfig({
   swig_compile: {
     options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/compiled.js': ['**/*.swig'],
     },
   },
 })
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### AMD
+Use `wrap-start` and `wrap-end` to produce an AMD-compatible template.
 
 ```js
 grunt.initConfig({
   swig_compile: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      "wrap-start": "define(function () { return ",
+      "wrap-end": "; });"
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      expand: true,
+      cwd: 'js/',
+      src: ['**/*.swig'],
+      dest: 'build/',
+      ext: '.js'
     },
   },
 })
@@ -84,6 +88,3 @@ grunt.initConfig({
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-_(Nothing yet)_
