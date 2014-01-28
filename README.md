@@ -75,13 +75,13 @@ grunt.initConfig({
       "wrap-start": "define(function () { return ",
       "wrap-end": "; });"
     },
-    files: {
+    files: [{
       expand: true,
       cwd: 'js/',
       src: ['**/*.swig'],
       dest: 'build/',
       ext: '.js'
-    },
+    }],
   },
 })
 ```
