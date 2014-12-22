@@ -39,9 +39,9 @@ module.exports = function(grunt) {
 				}
 			}).map(function(filepath) {
 				// Read file source.
-				return options['wrap-start'] +
+				return options['wrap-start'].replace(/%filename%/g, filepath) +
 						swig.precompile(grunt.file.read(filepath), { filename: filepath, locals: options.locals }).tpl.toString().replace('anonymous', '') +
-						options['wrap-end']
+						options['wrap-end'].replace(/%filename%/g, filepath)
 				;
 			}).join(grunt.util.normalizelf(options.separator));
 
