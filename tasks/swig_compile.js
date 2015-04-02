@@ -27,12 +27,13 @@ module.exports = function(grunt) {
 			locals: {}
 		});
 
-        if (options['filters']) {
-            var filters = require(path.resolve(options['filters']));
-            Object.keys(filters).forEach(function (name) {
-                swig.setFilter(name, filters[name]);
-            });
-        }
+		if (options['filters']) {
+			var filters = require(path.resolve(options['filters']));
+			Object.keys(filters).forEach(function (name) {
+				swig.setFilter(name, filters[name]);
+			});
+		}
+
 		// Iterate over all specified file groups.
 		this.files.forEach(function(f) {
 			// Concat specified files.
