@@ -9,6 +9,7 @@
 'use strict';
 
 var swig = require('swig');
+var path = require('path');
 
 module.exports = function(grunt) {
 
@@ -25,6 +26,13 @@ module.exports = function(grunt) {
 			'method-name': 'tpl',
 			locals: {}
 		});
+
+		if (options['filters']) {
+			var filters = require(path.resolve(options['filters']));
+			Object.keys(filters).forEach(function (name) {
+				swig.setFilter(name, filters[name]);
+			});
+		}
 
 		// Iterate over all specified file groups.
 		this.files.forEach(function(f) {
