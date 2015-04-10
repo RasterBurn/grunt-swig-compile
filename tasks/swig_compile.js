@@ -46,10 +46,12 @@ module.exports = function(grunt) {
 					return true;
 				}
 			}).map(function(filepath) {
+        var wrapStart = typeof options['wrap-start'] === 'function'? options['wrap-start'].call(grunt, filepath): options['wrap-start'];
+        var wrapEnd = typeof options['wrap-end'] === 'function'? options['wrap-end'].call(grunt, filepath): options['wrap-end'];
 				// Read file source.
-				return options['wrap-start'] +
+				return wrapStart +
 						swig.precompile(grunt.file.read(filepath), { filename: filepath, locals: options.locals }).tpl.toString().replace('anonymous', '') +
-						options['wrap-end']
+					  wrapEnd
 				;
 			}).join(grunt.util.normalizelf(options.separator));
 

@@ -40,16 +40,16 @@ grunt.initConfig({
 ### Options
 
 #### options.wrap-start
-Type: `String`
+Type: `String|Function`
 Default value: `'var tpl = '`
 
-Template wrapper beginning
+Template wrapper beginning or a function which returns it.
 
 #### options.wrap-end
-Type: `String`
+Type: `String|Function`
 Default value: `';'`
 
-Template wrapper end
+Template wrapper end or a function which returns it.
 
 ### Usage Examples
 
@@ -84,6 +84,27 @@ grunt.initConfig({
       dest: 'build/',
       ext: '.js'
     }],
+  },
+})
+```
+
+#### options.wrap-start as function
+Use the template filename in the template wrapper beginning.
+
+```js
+grunt.initConfig({
+  swig_compile: {
+    options: {
+      "wrap-start": function(filepath){
+        // get template filename
+        var name = require('path').basename(filepath, '.swig');
+        //
+        return 'var tpl_' + name + ' = ';
+      }
+    },
+    files: {
+      'dest/compiled.js': ['**/*.swig'],
+    },
   },
 })
 ```
